@@ -16,6 +16,7 @@
 	<div>
 		<div><a href="<%= request.getContextPath() %>/home/main">메인</a></div>
 	</div>
+	
 	<form action="doModify" method="post">
 		<input type="hidden" name="id" value="<%= articleMap.get("id") %>" />
 		<div>
@@ -32,5 +33,6 @@
 			</div>
 		</div>
 	</form>
+	
 </body>
 </html>

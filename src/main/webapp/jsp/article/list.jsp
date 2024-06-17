@@ -9,6 +9,7 @@
 	int cPage = (int) request.getAttribute("cPage");
 	int from = (int) request.getAttribute("from");
 	int end = (int) request.getAttribute("end");
+	int loginedMemberId = (int) request.getAttribute("loginedMemberId");
 %>
 
 <!DOCTYPE html>
@@ -17,14 +18,26 @@
 <meta charset="UTF-8">
 <title>게시물 리스트</title>
 </head>
+
+<style type="text/css">
+	.orange {
+		color: orange;
+	}	
+</style>
+
 <body>
+
 	<div>
 		<div><a href="<%= request.getContextPath() %>/home/main">메인</a></div>
 	</div>
 	
-	<div>
-		<a href="write">글쓰기</a>
-	</div>
+	<%
+		if(loginedMemberId != -1) {
+	%>
+		<div>
+			<a href="write">글쓰기</a>
+		</div>
+	<% } %>
 	
 	<table border=1>
 		<colgroup>
@@ -50,13 +63,6 @@
 		%>
 	</table>
 	
-	<style type="text/css">
-		.red {
-			color: red;
-			font-size: 1.5rem;
-		}
-	</style>
-	
 	<div>
 		<%
 		if (from != 1) {
@@ -74,7 +80,7 @@
 		<% 
 		for (int i = from; i <= end; i++) {
 		%>
-			<a class="<%= cPage == i ? "red" : "" %>" href="?page=<%= i %>"><%= i %></a>
+			<a class="<%= cPage == i ? "orange" : "" %>" href="?page=<%= i %>"><%= i %></a>
 		<%
 		}
 		%>

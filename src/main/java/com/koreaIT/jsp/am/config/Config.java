@@ -12,7 +12,7 @@ public class Config {
 		return "";
 	}
 	public static String getDBDriverName() {
-		return "com.mysql.jdbc.Driver";
+		return "com.mysql.cj.jdbc.Driver";
 	}
 
 }

@@ -16,6 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/article/list")
 public class ArticleListServlet extends HttpServlet {
@@ -53,6 +54,14 @@ public class ArticleListServlet extends HttpServlet {
 			sql.append("SELECT * FROM article");
 			sql.append("ORDER BY id DESC");
 			sql.append("LIMIT ?, ?", limitFrom, itemsInAPage);
+			
+			HttpSession session = request.getSession();
+			
+			int loginedMemberId = -1;
+			
+			if(session.getAttribute("loginedMemberId") != null) {
+				loginedMemberId = (int) session.getAttribute("loginedMemberId");
+			}
 			
 			List<Map<String, Object>> articleListMap = DBUtil.selectRows(connection, sql);
 			
